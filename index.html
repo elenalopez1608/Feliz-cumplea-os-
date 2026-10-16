@@ -1,15 +1,25 @@
-<!DOCTYPE html>
+
+  
+ <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>System.init(PARA MI AMOR) - Happy Birthday ❤️</title>
+
+    <!-- Metadatos para compartir (WhatsApp / Twitter) -->
+    <meta name="description" content="Feliz cumpleaños, mi pedacito de cielo 🎂✨">
+    <meta property="og:title" content="System.init(PARA MI AMOR) ❤️">
+    <meta property="og:description" content="Ejecuta la sorpresa de cumpleaños 🎉">
+    <meta property="og:type" content="website">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- Canvas Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <!-- Google Fonts Fira Code -->
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600;700&display=swap" rel="stylesheet">
+
     <style>
         body { font-family: 'Fira Code', monospace; }
         .glow { box-shadow: 0 0 25px rgba(244, 63, 94, 0.4); }
@@ -20,31 +30,40 @@
 
     <!-- Tarjeta Principal Tipo Terminal / IDE -->
     <main class="w-full max-w-2xl bg-slate-900 border border-slate-800 rounded-xl shadow-2xl overflow-hidden glow">
-        
+
         <!-- Barra de estado de la Terminal -->
         <div class="terminal-header px-4 py-3 flex items-center justify-between border-b border-slate-800 text-xs text-slate-400">
             <div class="flex items-center space-x-2">
                 <span class="w-3 h-3 bg-red-500 rounded-full inline-block"></span>
                 <span class="w-3 h-3 bg-yellow-500 rounded-full inline-block"></span>
                 <span class="w-3 h-3 bg-green-500 rounded-full inline-block"></span>
-                <span class="ml-2 text-slate-400">bash - mi_pedacito_de_cielo.sh</span>
+                <span class="ml-2 text-slate-400 hidden sm:inline">bash - mi_pedacito_de_cielo.sh</span>
             </div>
             <span class="text-rose-400 font-semibold">v2.0_prod</span>
         </div>
 
         <!-- Contenido Central -->
         <div class="p-6 md:p-8 space-y-6">
-            
+
             <!-- Perfil / Foto de Ella -->
             <div class="flex flex-col items-center space-y-4">
                 <div class="relative">
-                    <img src="foto.jpg" alt="Mi pedacito de cielo" class="w-32 h-32 md:w-40 md:h-40 object-cover rounded-full border-4 border-rose-500/80 shadow-lg glow">
+                    <!-- Contenedor con fallback: si foto.jpg no existe, se ve el 💖 -->
+                    <div class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-rose-500/80 shadow-lg glow overflow-hidden bg-rose-500/20 flex items-center justify-center">
+                        <span class="absolute text-5xl select-none">💖</span>
+                        <img
+                            src="./foto.jpg"
+                            alt="Mi pedacito de cielo"
+                            class="relative w-full h-full object-cover"
+                            onerror="this.style.display='none'"
+                        >
+                    </div>
                     <span class="absolute bottom-1 right-1 bg-emerald-500 text-slate-950 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider border border-slate-900">
                         Online
                     </span>
                 </div>
                 <div class="text-center">
-                    <h1 class="text-2xl md:text-3xl font-bold text-white">Ing. [Greinelly Campos] 👩‍💻</h1>
+                    <h1 class="text-2xl md:text-3xl font-bold text-white">Ing. Greinelly Campos 👩‍💻</h1>
                     <p class="text-xs text-rose-400 mt-1">&lt;Que los cumplas feliz ✨ /&gt;</p>
                 </div>
             </div>
@@ -55,12 +74,12 @@
                 <p class="text-slate-400">&gt; Target: <span class="text-rose-400 font-semibold">Mi pedacito de cielo</span></p>
                 <p class="text-slate-400">&gt; Status: <span class="text-emerald-400 font-semibold">100% In Love</span></p>
                 <p class="text-slate-400">&gt; Uptime: <span class="text-indigo-400">Infinitos días felices juntos</span></p>
-                
+
                 <hr class="border-slate-800 my-2">
 
                 <!-- Carta / Dedicatoria Inicial -->
                 <p class="text-slate-200 leading-relaxed italic pt-2 transition-all duration-300" id="console-text">
-                    "Hola,NENE. Haz clic en los botones de abajo para ejecutar las sorpresas que preparé para ti en este sistema."
+                    "Hola, NENE. Haz clic en los botones de abajo para ejecutar las sorpresas que preparé para ti en este sistema."
                 </p>
             </div>
 
@@ -103,8 +122,8 @@
                     colors: ['#f43f5e', '#fb7185', '#fda4af', '#ffffff']
                 });
 
-                consola.innerHTML = `<span class="text-rose-400 font-bold">[SUCCESS]:</span> "¡Feliz cumpleaños, mi pedacito de cielo!no hay código capaz de calcular lo mucho que te significas en mi vida, gracias por todo lo que vivimos apesar de todo y Que todos tus proyectos y sueños se compilen con éxito este nuevo año! 🎂✨"`;
-            } 
+                consola.innerHTML = `<span class="text-rose-400 font-bold">[SUCCESS]:</span> "¡Feliz cumpleaños, mi pedacito de cielo! No hay código capaz de calcular lo mucho que significas en mi vida. Gracias por todo lo que vivimos, a pesar de todo. ¡Que todos tus proyectos y sueños se compilen con éxito este nuevo año! 🎂✨"`;
+            }
             else if (tipo === 'dedicatoria') {
                 confetti({
                     particleCount: 50,
@@ -116,13 +135,14 @@
                 // AQUÍ PUEDES EDITAR TU DEDICATORIA PERSONAL:
                 consola.innerHTML = `
                     <span class="text-pink-400 font-bold">[READING: dedicatoria.md]:</span><br><br>
-                    "Mi Dulce condena,<br><br>
-                FELIZ CUMPLEAÑOS DESEO PARA TI TODO LO LINDO QUE TIENE EL UNIVERSO,QUE SIGAS ADELANTE, QUE DISFRUTES TU VIDA,QUE SEAN MUCHISIMOS MAS, QUE DIOS BENDIGA TU VIDA GRANDEMENTE,Y TODAS LAS METAS Y SUEÑOS QUE TENGAS, TODO SE TE CUMPLA, RECUERDA NUNCA ES TARDE.<br><br>
-                     QUE ESTE AÑO TRAIGA tantos éxitos profesionales como momentos felices, Te adoro por siempre tu nene. ❤️"
+                    "Mi dulce condena,<br><br>
+                    FELIZ CUMPLEAÑOS. Deseo para ti todo lo lindo que tiene el universo, que sigas adelante, que disfrutes tu vida, que sean muchísimos más, que Dios bendiga tu vida grandemente, y que todas las metas y sueños que tengas se te cumplan. Recuerda: nunca es tarde.<br><br>
+                    Que este año traiga tantos éxitos profesionales como momentos felices. Te adoro por siempre, tu nene. ❤️"
                 `;
-            } 
+            }
             else if (tipo === 'playlist') {
-                window.open('https://open.spotify.com', '_blank'); // Cambia si quieres por tu link de Spotify
+                // 👇 CAMBIA ESTE LINK POR EL DE TU PLAYLIST REAL DE SPOTIFY
+                window.open('https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M', '_blank');
                 consola.innerHTML = `<span class="text-indigo-400 font-bold">[AUDIO]:</span> Abriendo nuestra playlist especial en Spotify... 🎧`;
             }
         }
