@@ -5,147 +5,360 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>System.init(PARA MI AMOR) - Happy Birthday ❤️</title>
+    <title>Feliz Cumpleaños, Mi Amor ❤️</title>
 
     <!-- Metadatos para compartir (WhatsApp / Twitter) -->
     <meta name="description" content="Feliz cumpleaños, mi pedacito de cielo 🎂✨">
-    <meta property="og:title" content="System.init(PARA MI AMOR) ❤️">
-    <meta property="og:description" content="Ejecuta la sorpresa de cumpleaños 🎉">
+    <meta property="og:title" content="Feliz Cumpleaños, Mi Amor ❤️">
+    <meta property="og:description" content="Una sorpresa especial para ti 🎉">
     <meta property="og:type" content="website">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- Canvas Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <!-- Google Fonts Fira Code -->
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Fuentes: Quicksand (cuerpo) + Dancing Script (elegante) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        body { font-family: 'Fira Code', monospace; }
-        .glow { box-shadow: 0 0 25px rgba(244, 63, 94, 0.4); }
-        .terminal-header { background: #1e1e2e; }
+        * { -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 20%, #e0f2fe 50%, #f0f9ff 80%, #fdf2f8 100%);
+            background-size: 300% 300%;
+            animation: bgShift 22s ease infinite;
+            min-height: 100vh;
+        }
+        @keyframes bgShift {
+            0%, 100% { background-position: 0% 50%; }
+            50%      { background-position: 100% 50%; }
+        }
+
+        .font-script { font-family: 'Dancing Script', cursive; }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+        }
+
+        /* Corazones flotando */
+        @keyframes floatUp {
+            0%   { transform: translateY(0) rotate(0deg) scale(0.6); opacity: 0; }
+            15%  { opacity: 0.9; }
+            85%  { opacity: 0.9; }
+            100% { transform: translateY(-110vh) rotate(360deg) scale(1); opacity: 0; }
+        }
+        .float-heart {
+            position: fixed;
+            bottom: -40px;
+            animation: floatUp linear forwards;
+            pointer-events: none;
+            z-index: 0;
+            filter: drop-shadow(0 2px 4px rgba(251, 113, 133, 0.25));
+        }
+
+        /* Texto brillante */
+        @keyframes shimmer {
+            0%   { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        .shimmer {
+            background: linear-gradient(90deg, #f472b6, #0ea5e9, #f472b6, #0ea5e9);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 4.5s linear infinite;
+        }
+
+        /* Brillo del marco de la foto */
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 25px rgba(251, 113, 133, 0.35), 0 0 50px rgba(56, 189, 248, 0.2); }
+            50%      { box-shadow: 0 0 40px rgba(251, 113, 133, 0.55), 0 0 80px rgba(56, 189, 248, 0.35); }
+        }
+        .glow-pulse { animation: glowPulse 4s ease-in-out infinite; }
+
+        /* Marco de la foto */
+        .photo-frame {
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .photo-frame:hover { transform: rotate(0deg) scale(1.05); }
+
+        /* Llama de la vela */
+        @keyframes flicker {
+            0%, 100% { transform: scale(1) rotate(-3deg); }
+            50%      { transform: scale(1.12) rotate(3deg); }
+        }
+        .flame {
+            width: 10px;
+            height: 14px;
+            background: radial-gradient(ellipse at center bottom, #fef08a 0%, #fb923c 55%, #ef4444 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            margin: 0 auto;
+            animation: flicker 0.4s ease-in-out infinite alternate;
+            box-shadow: 0 0 12px rgba(251, 146, 60, 0.85), 0 0 22px rgba(251, 146, 60, 0.4);
+            transform-origin: center bottom;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .candles-out .flame {
+            opacity: 0;
+            transform: scale(0) translateY(-10px);
+        }
+
+        /* Botones */
+        .btn-lift { transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s; }
+        .btn-lift:hover { transform: translateY(-3px); }
+        .btn-lift:active { transform: translateY(0) scale(0.98); }
+
+        /* Aparición suave */
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.92) translateY(20px); }
+            to   { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .reveal { animation: fadeInScale 0.7s ease-out forwards; }
+
+        /* Cursor de máquina de escribir */
+        .typing::after {
+            content: '|';
+            color: #f472b6;
+            animation: blink 0.7s infinite;
+            margin-left: 2px;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Sorpresa oculta */
+        .hidden-surprise { display: none; }
+        .hidden-surprise.show { display: block; }
+
+        /* Destellos */
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0.3) rotate(0deg); }
+            50%      { opacity: 1; transform: scale(1) rotate(20deg); }
+        }
+        .sparkle { animation: sparkle 2.2s ease-in-out infinite; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex items-center justify-center p-4">
+<body class="text-slate-800 relative overflow-x-hidden p-4">
 
-    <!-- Tarjeta Principal Tipo Terminal / IDE -->
-    <main class="w-full max-w-2xl bg-slate-900 border border-slate-800 rounded-xl shadow-2xl overflow-hidden glow">
+    <!-- Blobs decorativos de fondo -->
+    <div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-pink-300/35 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-sky-300/35 rounded-full blur-3xl"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-purple-200/25 rounded-full blur-3xl"></div>
+    </div>
 
-        <!-- Barra de estado de la Terminal -->
-        <div class="terminal-header px-4 py-3 flex items-center justify-between border-b border-slate-800 text-xs text-slate-400">
-            <div class="flex items-center space-x-2">
-                <span class="w-3 h-3 bg-red-500 rounded-full inline-block"></span>
-                <span class="w-3 h-3 bg-yellow-500 rounded-full inline-block"></span>
-                <span class="w-3 h-3 bg-green-500 rounded-full inline-block"></span>
-                <span class="ml-2 text-slate-400 hidden sm:inline">bash - mi_pedacito_de_cielo.sh</span>
-            </div>
-            <span class="text-rose-400 font-semibold">v2.0_prod</span>
-        </div>
+    <!-- Capa de corazones flotantes -->
+    <div id="hearts" class="fixed inset-0 pointer-events-none overflow-hidden z-0"></div>
 
-        <!-- Contenido Central -->
-        <div class="p-6 md:p-8 space-y-6">
+    <!-- Tarjeta principal -->
+    <main class="relative z-10 w-full max-w-lg mx-auto glass rounded-[2rem] shadow-2xl shadow-pink-200/60 overflow-hidden my-6">
 
-            <!-- Perfil / Foto de Ella -->
-            <div class="flex flex-col items-center space-y-4">
+        <!-- Barra superior con gradiente -->
+        <div class="h-1.5 bg-gradient-to-r from-pink-400 via-rose-300 to-sky-400"></div>
+
+        <div class="p-6 md:p-8 space-y-5">
+
+            <!-- Foto -->
+            <div class="flex justify-center -mt-1">
                 <div class="relative">
-                    <!-- Contenedor con fallback: si foto.jpg no existe, se ve el 💖 -->
-                    <div class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-rose-500/80 shadow-lg glow overflow-hidden bg-rose-500/20 flex items-center justify-center">
-                        <span class="absolute text-5xl select-none">💖</span>
-                        <img
-                            src="./foto.jpg"
-                            alt="Mi pedacito de cielo"
-                            class="relative w-full h-full object-cover"
-                            onerror="this.style.display='none'"
-                        >
+                    <div class="photo-frame w-36 h-36 md:w-44 md:h-44 rounded-full p-1 bg-gradient-to-br from-pink-400 via-rose-300 to-sky-400 shadow-xl glow-pulse" style="transform: rotate(-3deg)">
+                        <div class="w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-pink-100 to-sky-100 flex items-center justify-center relative">
+                            <span class="absolute text-6xl select-none">💖</span>
+                            <img
+                                src="./foto.jpg"
+                                alt="Mi pedacito de cielo"
+                                class="relative w-full h-full object-cover"
+                                onerror="this.style.display='none'"
+                            >
+                        </div>
                     </div>
-                    <span class="absolute bottom-1 right-1 bg-emerald-500 text-slate-950 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider border border-slate-900">
-                        Online
-                    </span>
-                </div>
-                <div class="text-center">
-                    <h1 class="text-2xl md:text-3xl font-bold text-white">Ing. Greinelly Campos 👩‍💻</h1>
-                    <p class="text-xs text-rose-400 mt-1">&lt;Que los cumplas feliz ✨ /&gt;</p>
+                    <span class="absolute -top-1 -right-2 text-2xl sparkle select-none">✨</span>
+                    <span class="absolute -bottom-1 -left-2 text-xl sparkle select-none" style="animation-delay:1s">💖</span>
+                    <span class="absolute top-1/2 -right-4 text-lg sparkle select-none" style="animation-delay:.5s">🌸</span>
                 </div>
             </div>
 
-            <!-- Terminal / Consola de Mensajes -->
-            <div class="bg-slate-950 p-4 rounded-lg border border-slate-800 text-sm space-y-2 text-slate-300">
-                <p class="text-emerald-400"><span class="text-slate-500">$</span> ./check_status.sh</p>
-                <p class="text-slate-400">&gt; Target: <span class="text-rose-400 font-semibold">Mi pedacito de cielo</span></p>
-                <p class="text-slate-400">&gt; Status: <span class="text-emerald-400 font-semibold">100% In Love</span></p>
-                <p class="text-slate-400">&gt; Uptime: <span class="text-indigo-400">Infinitos días felices juntos</span></p>
+            <!-- Nombre y título -->
+            <div class="text-center space-y-1">
+                <p class="text-[11px] uppercase tracking-[0.35em] text-sky-500 font-semibold">Feliz Cumpleaños</p>
+                <h1 class="font-script text-4xl md:text-5xl shimmer leading-tight">Greinelly Campos</h1>
+                <p class="text-rose-500 text-sm font-medium">Mi pedacito de cielo 🎂✨</p>
+            </div>
 
-                <hr class="border-slate-800 my-2">
+            <!-- Pastel interactivo -->
+            <div class="flex justify-center pt-2 pb-1">
+                <div class="relative w-44 h-40 cursor-pointer select-none" onclick="soplarVelas()" id="cake" title="¡Haz clic para soplar las velas! 🎂">
+                    <!-- Velas -->
+                    <div class="absolute top-0 inset-x-0 flex justify-center gap-5 z-10" id="candles">
+                        <div class="flex flex-col items-center">
+                            <div class="flame"></div>
+                            <div class="w-1.5 h-6 bg-gradient-to-b from-pink-200 to-pink-300 rounded-sm"></div>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="flame"></div>
+                            <div class="w-1.5 h-6 bg-gradient-to-b from-pink-200 to-pink-300 rounded-sm"></div>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="flame"></div>
+                            <div class="w-1.5 h-6 bg-gradient-to-b from-pink-200 to-pink-300 rounded-sm"></div>
+                        </div>
+                    </div>
 
-                <!-- Carta / Dedicatoria Inicial -->
-                <p class="text-slate-200 leading-relaxed italic pt-2 transition-all duration-300" id="console-text">
-                    "Hola, NENE. Haz clic en los botones de abajo para ejecutar las sorpresas que preparé para ti en este sistema."
+                    <!-- Pastel -->
+                    <div class="absolute bottom-4 inset-x-4">
+                        <div class="h-5 bg-white rounded-t-2xl shadow-sm"></div>
+                        <div class="h-24 bg-gradient-to-b from-pink-300 via-pink-400 to-rose-500 rounded-b-2xl relative overflow-hidden shadow-lg">
+                            <div class="absolute top-4 left-4 w-2 h-2 bg-white/60 rounded-full"></div>
+                            <div class="absolute top-10 right-6 w-2 h-2 bg-sky-300/70 rounded-full"></div>
+                            <div class="absolute bottom-6 left-1/3 w-1.5 h-1.5 bg-white/60 rounded-full"></div>
+                            <div class="absolute bottom-4 right-1/3 w-1.5 h-1.5 bg-yellow-200/80 rounded-full"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Zona de mensajes -->
+            <div class="bg-white/70 rounded-2xl p-5 min-h-[100px] border border-pink-200/70 shadow-inner flex items-center justify-center">
+                <p id="message" class="text-slate-700 text-center text-sm md:text-base leading-relaxed">
+                    Presiona los botones de abajo para descubrir las sorpresas que preparé para ti 💝
                 </p>
             </div>
 
-            <!-- Botones de Comandos Interactivos -->
+            <!-- Botones -->
             <div class="space-y-3">
-                <!-- Botón principal para la gran sorpresa -->
-                <button onclick="ejecutarComando('amor')" class="w-full bg-rose-600 hover:bg-rose-500 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 flex items-center justify-center space-x-2 text-sm shadow-md cursor-pointer">
-                    <span>⚡ EXECUTE: run_birthday_surprise.exe</span>
+                <button onclick="sorpresa()" class="btn-lift w-full bg-gradient-to-r from-pink-500 via-rose-400 to-pink-500 text-white font-bold py-4 rounded-2xl shadow-lg shadow-pink-400/40 text-sm md:text-base flex items-center justify-center gap-2">
+                    <span>🎁</span> Abrir Sorpresa
                 </button>
-
-                <!-- Botones secundarios: Dedicatoria y Playlist -->
                 <div class="grid grid-cols-2 gap-3">
-                    <button onclick="ejecutarComando('dedicatoria')" class="bg-slate-800 hover:bg-slate-700 text-rose-300 py-2.5 px-3 rounded-lg text-xs font-medium border border-rose-500/30 transition cursor-pointer flex items-center justify-center space-x-1">
-                        <span>💌 cat dedicatoria.md</span>
+                    <button onclick="dedicatoria()" class="btn-lift bg-white border-2 border-pink-300 text-pink-500 py-3 rounded-2xl font-semibold text-xs md:text-sm flex items-center justify-center gap-1.5 hover:bg-pink-50">
+                        <span>💌</span> Mi Carta
                     </button>
-                    <button onclick="ejecutarComando('playlist')" class="bg-slate-800 hover:bg-slate-700 text-indigo-300 py-2.5 px-3 rounded-lg text-xs font-medium border border-indigo-500/30 transition cursor-pointer flex items-center justify-center space-x-1">
-                        <span>🎵 LOAD: playlist.mp3</span>
+                    <button onclick="playlist()" class="btn-lift bg-white border-2 border-sky-300 text-sky-500 py-3 rounded-2xl font-semibold text-xs md:text-sm flex items-center justify-center gap-1.5 hover:bg-sky-50">
+                        <span>🎵</span> Playlist
                     </button>
                 </div>
             </div>
 
-            <!-- Footer / Mensaje de Amor -->
-            <div class="text-center text-xs text-slate-500 pt-2">
-                <code>git commit -m "Por siempre, mi Pedacito de Cielo ❤️"</code>
+            <!-- Sorpresa oculta (cupón) -->
+            <div id="extraSurprise" class="hidden-surprise">
+                <div class="reveal bg-gradient-to-br from-pink-50 to-sky-50 rounded-2xl p-5 border-2 border-dashed border-pink-300 text-center">
+                    <p class="text-[10px] uppercase tracking-widest text-sky-500 font-bold mb-2">🎟️ Cupón Especial 🎟️</p>
+                    <p class="font-script text-2xl text-pink-500 mb-1">Un día entero juntos</p>
+                    <p class="text-xs text-slate-600">Válido para canjear cuando quieras. Sin fecha de vencimiento. 💕</p>
+                    <p class="mt-3 text-xs text-sky-500 font-semibold">Se canjea con un beso 🎁</p>
+                </div>
             </div>
+
+            <!-- Footer -->
+            <p class="text-center text-[11px] text-slate-400 pt-1">
+                Hecho con 💖 y 💙 solo para ti
+            </p>
 
         </div>
     </main>
 
     <!-- Script de Interactividad -->
     <script>
-        function ejecutarComando(tipo) {
-            const consola = document.getElementById('console-text');
-
-            if (tipo === 'amor') {
-                confetti({
-                    particleCount: 150,
-                    spread: 80,
-                    origin: { y: 0.6 },
-                    colors: ['#f43f5e', '#fb7185', '#fda4af', '#ffffff']
-                });
-
-                consola.innerHTML = `<span class="text-rose-400 font-bold">[SUCCESS]:</span> "¡Feliz cumpleaños, mi pedacito de cielo! No hay código capaz de calcular lo mucho que significas en mi vida. Gracias por todo lo que vivimos, a pesar de todo. ¡Que todos tus proyectos y sueños se compilen con éxito este nuevo año! 🎂✨"`;
-            }
-            else if (tipo === 'dedicatoria') {
-                confetti({
-                    particleCount: 50,
-                    spread: 50,
-                    origin: { y: 0.7 },
-                    colors: ['#f43f5e', '#ffffff']
-                });
-
-                // AQUÍ PUEDES EDITAR TU DEDICATORIA PERSONAL:
-                consola.innerHTML = `
-                    <span class="text-pink-400 font-bold">[READING: dedicatoria.md]:</span><br><br>
-                    "Mi dulce condena,<br><br>
-                    FELIZ CUMPLEAÑOS. Deseo para ti todo lo lindo que tiene el universo, que sigas adelante, que disfrutes tu vida, que sean muchísimos más, que Dios bendiga tu vida grandemente, y que todas las metas y sueños que tengas se te cumplan. Recuerda: nunca es tarde.<br><br>
-                    Que este año traiga tantos éxitos profesionales como momentos felices. Te adoro por siempre, tu nene. ❤️"
-                `;
-            }
-            else if (tipo === 'playlist') {
-                // 👇 CAMBIA ESTE LINK POR EL DE TU PLAYLIST REAL DE SPOTIFY
-                window.open('https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M', '_blank');
-                consola.innerHTML = `<span class="text-indigo-400 font-bold">[AUDIO]:</span> Abriendo nuestra playlist especial en Spotify... 🎧`;
-            }
+        /* ===== Corazones flotantes ===== */
+        const heartEmojis = ['💖', '💕', '💗', '💝', '🌸', '✨', '💙', '🩷', '🩵'];
+        function spawnHeart() {
+            const h = document.createElement('div');
+            h.className = 'float-heart';
+            h.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+            h.style.left = (Math.random() * 100) + 'vw';
+            h.style.fontSize = (14 + Math.random() * 18) + 'px';
+            h.style.animationDuration = (8 + Math.random() * 8) + 's';
+            document.getElementById('hearts').appendChild(h);
+            setTimeout(() => h.remove(), 17000);
         }
+        setInterval(spawnHeart, 700);
+        for (let i = 0; i < 8; i++) setTimeout(spawnHeart, i * 250);
+
+        /* ===== Confetti personalizado (rosa + celeste) ===== */
+        function pinkBlueConfetti(opts = {}) {
+            confetti({
+                particleCount: 120,
+                spread: 90,
+                origin: { y: 0.6 },
+                colors: ['#f472b6', '#fb7185', '#38bdf8', '#7dd3fc', '#ffffff', '#fbcfe8'],
+                ...opts
+            });
+        }
+
+        /* ===== Efecto máquina de escribir ===== */
+        let typerTimer = null;
+        function typeText(el, text, speed = 16) {
+            if (typerTimer) clearInterval(typerTimer);
+            el.textContent = '';
+            el.classList.add('typing');
+            let i = 0;
+            typerTimer = setInterval(() => {
+                if (i < text.length) {
+                    el.textContent = text.slice(0, i + 1);
+                    i++;
+                } else {
+                    clearInterval(typerTimer);
+                    typerTimer = null;
+                    el.classList.remove('typing');
+                }
+            }, speed);
+        }
+
+        /* ===== Sorpresas ===== */
+        const msgEl = document.getElementById('message');
+
+        function sorpresa() {
+            // Triple estallido de confetti
+            pinkBlueConfetti({ particleCount: 180, spread: 100 });
+            setTimeout(() => pinkBlueConfetti({ particleCount: 80, angle: 60,  origin: { x: 0 } }), 180);
+            setTimeout(() => pinkBlueConfetti({ particleCount: 80, angle: 120, origin: { x: 1 } }), 320);
+
+            const text = '¡Feliz cumpleaños, mi pedacito de cielo! 🎂✨ No hay código en el mundo capaz de calcular lo mucho que significas para mí. Gracias por cada momento, por cada risa, por estar siempre. ¡Que este nuevo año se te compile lleno de sueños cumplidos, salud y mucho amor! 💖';
+            typeText(msgEl, text, 15);
+
+            // Revelar cupón sorpresa
+            const extra = document.getElementById('extraSurprise');
+            extra.classList.add('show');
+            setTimeout(() => extra.scrollIntoView({ behavior: 'smooth', block: 'center' }), 600);
+        }
+
+        function dedicatoria() {
+            pinkBlueConfetti({ particleCount: 60, spread: 70 });
+            const text = 'Mi dulce condena: FELIZ CUMPLEAÑOS. Deseo para ti todo lo lindo que tiene el universo, que sigas adelante, que disfrutes tu vida, que sean muchísimos más. Que Dios bendiga tu vida grandemente y que todas las metas y sueños que tengas se te cumplan. Recuerda: nunca es tarde. Que este año traiga tantos éxitos profesionales como momentos felices. Te adoro por siempre, tu nene. ❤️';
+            typeText(msgEl, text, 12);
+        }
+
+        function playlist() {
+            // 👇 CAMBIA ESTE LINK POR EL DE TU PLAYLIST REAL DE SPOTIFY
+            window.open('https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M', '_blank');
+            if (typerTimer) clearInterval(typerTimer);
+            msgEl.classList.remove('typing');
+            msgEl.textContent = '🎧 Abriendo nuestra playlist especial... ¡dale play y disfruta! 💙';
+            pinkBlueConfetti({ particleCount: 45, spread: 60 });
+        }
+
+        function soplarVelas() {
+            const candles = document.getElementById('candles');
+            if (candles.classList.contains('candles-out')) return;
+            candles.classList.add('candles-out');
+            pinkBlueConfetti({ particleCount: 110, spread: 85 });
+            if (typerTimer) clearInterval(typerTimer);
+            msgEl.classList.remove('typing');
+            msgEl.textContent = '🎂 ¡Deseo pedido! Que se cumpla cada uno de tus sueños, mi amor. ✨';
+        }
+
+        /* ===== Confetti suave al cargar ===== */
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                pinkBlueConfetti({ particleCount: 60, spread: 80, origin: { y: 0.35 }, scalar: 0.9 });
+            }, 500);
+        });
     </script>
 </body>
 </html>
